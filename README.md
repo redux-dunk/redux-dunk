@@ -60,7 +60,7 @@ NoOp() - effect that does nothing
  - Effect testers
  - Effect helpers
 
-## Comparison with redux-loop
+## Comparison with redux-loop ➿
 
 Every dunk is a loop but not every loop is a dunk:
 
@@ -110,7 +110,7 @@ The high level concepts of loop apply to dunk: https://redux-loop.js.org/
  - Calling `loop` returns a modified object that contains the effects, but we found there is no need for that. `dunk` simply returns the state object it got, and queues the effects in the internal queue.
  - Written in Typescript
 
-### Cons over loop ➿ 
+### Cons over loop ➿
 - Effect type doesn't tell which actions will be dispatched if any (because you write whatever you want in the effect body)
 - More freedom in effects might lead to bad code? Loop has a strict (and limited) view on effects which might or might not work out for you.
 
