@@ -8,18 +8,27 @@
 
 Shape of an Effect:
 
-`({ dispatch, getState }) => any`
+` async({ dispatch, getState }) => any`
 
 Shape of an EffectCreator:
 
-`(...extraParams) => ({ dispatch, getState }) => any`
+`(...extraParams) => async ({ dispatch, getState }) => any`
 
-Usage examples in reducer:
-
+Usage examples in a reducer:
+```
 return dunk(newState) - does nothing interesting
 return dunk(newState, Effects.doTheThing) - paramterless Effect
 return dunk(newState, Effects.reorderTopic(action.payload.topicId, action.payload.to)); - effect created with parameters
-
+ const effects = [
+     Sequence(
+       TestEffects.testEff1, 
+       Delay(100, TestEffects.testEff2), 
+       TestEffects.testEff3
+      ),
+     Delay(50, TestEffects.testParallel),
+ ];
+ return dunk(state, ...effects); - you can compose and build effects with cool helpers to describe your flow in a composable, testable way
+````
 ## How effects are run with the redux store?
 
  1. There is a dispatch(action) somewhere
@@ -32,40 +41,53 @@ return dunk(newState, Effects.reorderTopic(action.payload.topicId, action.payloa
 note
 
 - Effects are always scheduled after the reducer has finished.
-- Effects run async (end of current event-loop tick)
+- Effects are async functions
+- Effects run deferred async (end of current event-loop tick)
 - getState always returns the latest state in the store, not the one it was when the effect was scheduled (this is 👍 )
 - avoid never-ending loops (action->reducer->effect->action->..) ⚠️ 
 
 ## Api Reference
 
+Effect(effect) - let's you easily create an effect, shape: ` async ({ dispatch, getState }) => any`
+EffectCreator(effectCreator) - easily create an effect creator, shape: `(...extraParams) => async ({ dispatch, getState }) => any`
 Delay(ms, effect) - run effect after ms delay
 Sequence(…effects) - run effects in order waiting for promise to resolve. if one fails the effect fails
 Par(…effects) - same as dunk(state, …effects), starts running effects parallelly
 Catch(effect, failEffect) try to run effect if it fails run the failEffect
 NoOp() - effect that does nothing
 
-## Testing
+## TODOs
+ - Effect testers
+ - 
+
 ## Comparison with redux-loop
 
 Every dunk is a loop but not every loop is a dunk:
+
 Shape of a Loop Cmd:
-
-
-
-Here is how you can create Loop in 10 lines with Dunk:
+```
+  Cmd.run(apiFetch, {
+     successActionCreator: resolveActionCreator,
+     failActionCreator: rejectActionCreator,
+     args: [action.payload.id]
+  })
+```
+Here is how you can recreate the loop Cmd in 10 lines with Dunk:
 
 ```
-function LoopCmd(
-    promise: (...params: Params) => Promise<ReturnType>,
-    successActionCreator: ActionCreator,
-    failedActionCreator: ActionCreator,
-) {
-    return EffectCreator((...params: Params) => storeApi => {
-        return promise(...params)
-            .then(res => storeApi.dispatch(successAction(...res)))
-            .catch(res => storeApi.dispatch(failedAction(...res)));
-    });
-}
+  function LoopCmd(
+      promise: (...params: Params) => Promise<ReturnType>,
+      successActionCreator: ActionCreator,
+      failedActionCreator: ActionCreator,
+  ) {
+      return EffectCreator((...params: Params) => storeApi => {
+          return promise(...params)
+              .then(res => storeApi.dispatch(successAction(...res)))
+              .catch(res => storeApi.dispatch(failedAction(...res)));
+      });
+  }
+  
+  LoopCmd(apiFetch, successActionCreator, failActionCreator)
 ```
 
 Dunk builds on the same architecture as loop, which is the one described above.
