@@ -56,9 +56,9 @@ Par(…effects) - same as dunk(state, …effects), starts running effects parall
 Catch(effect, failEffect) try to run effect if it fails run the failEffect
 NoOp() - effect that does nothing
 
-## TODOs
+## Todos
  - Effect testers
- - 
+ - Effect helpers
 
 ## Comparison with redux-loop
 
