@@ -2,7 +2,6 @@
 
 <img width="350" src="https://user-images.githubusercontent.com/11639734/108255304-61ff8e00-715c-11eb-8dca-30544a097424.png">
 
----
 
 🏀 Effect management in redux, inspired by loop ➿ 
 
