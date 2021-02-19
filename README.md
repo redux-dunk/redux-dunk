@@ -37,7 +37,7 @@ return dunk(newState, Effects.reorderTopic(topicId, targetIdx)); - effect create
  2. action goes to reducer 
  3. reducer creates new state, and calls dunk(newState, ...effects) which schedules effects in the queue to run later.
  4. reducer finishes and dunk as a next middleware gets called
- 5. dunk schedules the effects in the queue to run in the end of this event-loop tick (with promises in the job queue)
+ 5. dunk schedules the effects in the queue to run in the end of this event-loop tick (using promises, to the js job queue)
  6. effects run and might dispatch actions for the next redux round, or read the state whenever.
 
 note
