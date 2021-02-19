@@ -105,7 +105,7 @@ The high level concepts of loop apply to dunk: https://redux-loop.js.org/
  - Effects are composable, it's a monad basically
  - Effect api to your needs: any extra params and `getState`, `dispatch`
  - You are free in your effects, no babysitting success/fail action restrictions, dispatch as many actions as you want
- - Understandable effects: explicit dispatch calls, no mind  wrapped args, no spaghetti thinking
+ - Understandable effects: explicit dispatch calls, no mind wrapped args and implicit calls of dispatch
  - Composable effect creator helpers out of the box: `Delay`, `Sequence`, `Par`, `Catch` and more coming( `Cancelable`, `TakeOne`, `LoopCommand`, `Retry`, `Poll`, `Race`) all of these return an Effect.
  - It's just a middleware. While loop installs as an enhancer, we found there is no need for that. 
  - Calling `loop` returns a modified object that contains the effects, but we found there is no need for that. `dunk` simply returns the state object it got, and queues the effects in the internal queue.
