@@ -29,6 +29,8 @@ return dunk(newState, Effects.reorderTopic(action.payload.topicId, action.payloa
  5. dunk schedules the effects in the queue to run in the end of this event-loop tick (with promises in the job queue)
  6. effects run and might dispatch actions for the next redux round, or read the state whenever.
 
+note
+
 - Effects are always scheduled after the reducer has finished.
 - Effects run async (end of current event-loop tick)
 - getState always returns the latest state in the store, not the one it was when the effect was scheduled (this is 👍 )
