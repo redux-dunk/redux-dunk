@@ -27,8 +27,7 @@ return dunk(newState, Effects.reorderTopic(topicId, targetIdx)); - effect create
       ),
      Delay(50, TestEffects.testParallel),
  ];
- return dunk(state, ...effects); 
- - compose effects to describe your flow in a testable way
+ return dunk(state, ...effects);  - compose effects to describe your flow in a testable way
 ````
 ## How effects are run with the redux store?
 
