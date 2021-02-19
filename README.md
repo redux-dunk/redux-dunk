@@ -18,7 +18,8 @@ Usage examples in a reducer:
 ```
 return dunk(newState) - does nothing interesting
 return dunk(newState, Effects.doTheThing) - paramterless Effect
-return dunk(newState, Effects.reorderTopic(action.payload.topicId, action.payload.to)); - effect created with parameters
+return dunk(newState, Effects.reorderTopic(topicId, targetIdx)); - effect created with parameters
+
  const effects = [
      Sequence(
        TestEffects.testEff1, 
@@ -27,7 +28,8 @@ return dunk(newState, Effects.reorderTopic(action.payload.topicId, action.payloa
       ),
      Delay(50, TestEffects.testParallel),
  ];
- return dunk(state, ...effects); - you can compose and build effects with cool helpers to describe your flow in a composable, testable way
+ return dunk(state, ...effects); 
+ - you can compose and build effects with cool helpers to describe your flow in a composable, testable way
 ````
 ## How effects are run with the redux store?
 
