@@ -48,13 +48,13 @@ note
 
 ## Api Reference
 
-Effect(effect) - let's you easily create an effect, shape: ` async ({ dispatch, getState }) => any`
-EffectCreator(effectCreator) - easily create an effect creator, shape: `(...extraParams) => async ({ dispatch, getState }) => any`
-Delay(ms, effect) - run effect after ms delay
-Sequence(…effects) - run effects in order waiting for promise to resolve. if one fails the effect fails
-Par(…effects) - same as dunk(state, …effects), starts running effects parallelly
-Catch(effect, failEffect) try to run effect if it fails run the failEffect
-NoOp() - effect that does nothing
+- Effect(effect) - let's you easily create an effect, shape: ` async ({ dispatch, getState }) => any`
+- EffectCreator(effectCreator) - easily create an effect creator, shape: `(...extraParams) => async ({ dispatch, getState }) => any`
+- Delay(ms, effect) - run effect after ms delay
+- Sequence(…effects) - run effects in order waiting for promise to resolve. if one fails the effect fails
+- Par(…effects) - same as dunk(state, …effects), starts running effects parallelly
+- Catch(effect, failEffect) try to run effect if it fails run the failEffect
+- NoOp() - effect that does nothing
 
 ## Todos
  - Effect testers
