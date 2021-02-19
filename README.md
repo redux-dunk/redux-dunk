@@ -48,6 +48,10 @@ NoOp() - effect that does nothing
 ## Comparison with redux-loop
 
 Every dunk is a loop but not every loop is a dunk:
+Shape of a Loop Cmd:
+
+
+
 Here is how you can create Loop in 10 lines with Dunk:
 
 ```
@@ -65,6 +69,7 @@ function LoopCmd(
 ```
 
 Dunk builds on the same architecture as loop, which is the one described above.
+The high level concepts of loop apply to dunk: https://redux-loop.js.org/
 
 ### Commonalities 🤝 
 
